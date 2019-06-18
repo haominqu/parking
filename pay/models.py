@@ -51,8 +51,12 @@ class RechargeRecord(models.Model):
     customer = models.ForeignKey('userinfo.UserInfo', verbose_name='用户')
     charge_mode = models.ForeignKey(Bank, verbose_name='充值方式')
     charge_money = models.DecimalField(verbose_name='充值金额', decimal_places=2, max_digits=8)
+    pay_money = models.DecimalField(verbose_name='支付金额', decimal_places=2, max_digits=8)
     charge_date = models.DateTimeField(verbose_name='充值时间')
+    pay_date = models.CharField(verbose_name='付款时间', max_length=80, null=True)
     pay_status = models.IntegerField(verbose_name='支付状态', choices=PAY_STATUS, default=0)
+    out_trade_no = models.CharField(verbose_name='订单号', max_length=200, default='000000')
+    charge_detail = models.TextField(verbose_name='充值详情')
 
     def __str__(self):
         return self.customer.customer_name
